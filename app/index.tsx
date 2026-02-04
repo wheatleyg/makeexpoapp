@@ -10,7 +10,8 @@ import {
     Icons,
     IconProps,
     IconElement,
-    Icon
+    Icon,
+    Toggle
 } from "@ui-kitten/components";
 import { Link } from "expo-router";
 import React from "react";
@@ -18,7 +19,26 @@ import React from "react";
 export default function Index() {
 
     const [radioIndex, setRadioIndex] = React.useState(0);
-    const [tabIndex, setTabIndex] = React.useState(0);
+    const [factResponse, setFactResponse] = React.useState("nothingForNow");
+
+    async function callApi(tag: string){
+        const response = await fetch("http://localhost:5101/api/getByTag/" + tag);
+        const data = await response.json();
+
+        setFactResponse(data.factText.toString());
+    }
+    const [checked, setChecked] = React.useState(false);
+    const [genre, setGenre] = React.useState("cat")
+    const onCheckedChange = (isChecked): void => {
+        setChecked(isChecked);
+        if(isChecked == true){
+            setGenre("space")
+        }
+        else{
+            setGenre("cat")
+        }
+    };
+
 
 
 
@@ -72,16 +92,13 @@ export default function Index() {
                 </Radio>
             </RadioGroup>
         </Layout>
-            <BottomNavigation
-            appearance = 'noIndicator'
-            selectedIndex={tabIndex}
-            onSelect={index => setTabIndex(index)}>
-                <BottomNavigationTab title='USERS' />
-                <BottomNavigationTab title='ORDERS' />
-                <BottomNavigationTab title='TRANSACTIONS' />
-
-            </BottomNavigation>
-
+            <Toggle
+                checked={checked}
+                onChange={onCheckedChange}
+            >
+            Selected genre: {genre}</Toggle>
+        <Button onPress={() => callApi(genre)}> Hit me! </Button>
+        <Text> Response: {factResponse}</Text>
         </Layout>
     );
 }
