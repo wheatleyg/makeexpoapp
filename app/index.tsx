@@ -29,7 +29,7 @@ export default function Index() {
     }
     const [checked, setChecked] = React.useState(false);
     const [genre, setGenre] = React.useState("cat")
-    const onCheckedChange = (isChecked): void => {
+    const onCheckedChange = (isChecked: boolean | ((prevState: boolean) => boolean)): void => {
         setChecked(isChecked);
         if(isChecked == true){
             setGenre("space")
