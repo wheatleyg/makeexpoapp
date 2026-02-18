@@ -1,8 +1,6 @@
 import { Button, Layout, Radio, RadioGroup, Text, Toggle } from "@ui-kitten/components";
 import { Link } from "expo-router";
 import React from "react";
-import SideBarContent from "@/components/SideBar";
-
 export default function Index() {
 	const [radioIndex, setRadioIndex] = React.useState(0);
 	const [factResponse, setFactResponse] = React.useState("nothingForNow");
@@ -30,7 +28,6 @@ export default function Index() {
 				flex: 1,
 			}}
 		>
-			<SideBarContent />
 			<Layout
 				style={{
 					flex: 1,
