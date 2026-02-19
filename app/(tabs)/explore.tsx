@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Avatar,
   Button,
@@ -8,18 +8,13 @@ import {
   Theme,
   XStack,
   YStack,
-} from 'tamagui';
+} from "tamagui";
 
 export default function ProfileScreen() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   return (
     <Theme name="light">
-      <YStack
-        flex={1}
-        padding="$4"
-        gap="$4"
-        backgroundColor="$gray2"
-      >
+      <YStack flex={1} padding="$4" gap="$4" backgroundColor="$gray2">
         {/* Profile Header Card */}
         <Card
           elevation="$2"
@@ -29,7 +24,7 @@ export default function ProfileScreen() {
         >
           <XStack alignItems="center" gap="$4">
             <Avatar circular size="$6">
-              <Avatar.Image src="https://placehold.co/400x400/blue/white?text=Placeholder\n400x400" />
+              <Avatar.Image src="https://placehold.co/400x400/blue/white?text=Placeholder\n400x400/png" />
               <Avatar.Fallback backgroundColor="$gray6" />
             </Avatar>
             <YStack>
@@ -54,8 +49,8 @@ export default function ProfileScreen() {
             About
           </Text>
           <Text fontSize="$3" color="$gray11">
-            A vibrant example UI built with Tamagui primitives,
-            tokens, and compile-time styling.
+            A vibrant example UI built with Tamagui primitives, tokens, and
+            compile-time styling.
           </Text>
         </Card>
         {/* Stats Card */}
@@ -95,23 +90,16 @@ export default function ProfileScreen() {
             <Text fontSize="$5" fontWeight="600">
               Actions
             </Text>
-            <Button theme="active">
-              Follow
-            </Button>
-            <Button variant="outlined">
-              Message
-            </Button>
-            <Button
-              chromeless
-              onPress={() => setOpen(false)}
-            >
+            <Button theme="active">Follow</Button>
+            <Button variant="outlined">Message</Button>
+            <Button chromeless onPress={() => setOpen(false)}>
               <Button.Text color="$red10">Close</Button.Text>
             </Button>
           </Sheet.Frame>
         </Sheet>
       </YStack>
     </Theme>
-  )
+  );
 }
 // Helper Component for Stats Display
 function Stat({ label, value }: { label: string; value: string }) {
@@ -124,5 +112,5 @@ function Stat({ label, value }: { label: string; value: string }) {
         {label}
       </Text>
     </YStack>
-  )
+  );
 }
