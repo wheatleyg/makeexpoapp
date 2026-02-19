@@ -1,33 +1,33 @@
-// app/_layout.tsx
-import React from "react";
-import { Stack } from "expo-router";
-import {
-	ApplicationProvider,
-	Layout,
-	BottomNavigation,
-	BottomNavigationTab,
-} from "@ui-kitten/components";
-import * as eva from "@eva-design/eva";
+
+import { tamaguiConfig } from '@/tamagui.config';
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import 'react-native-reanimated';
+import { TamaguiProvider } from 'tamagui';
+
+
+import { useColorScheme } from '@/hooks/use-color-scheme';
+
+export const unstable_settings = {
+  anchor: '(tabs)',
+};
 
 export default function RootLayout() {
-	const [tabIndex, setTabIndex] = React.useState(0);
-	return (
-		<ApplicationProvider {...eva} theme={eva.dark}>
-			<Layout style={{ flex: 1 }}>
-				<Stack>
-					<Stack.Screen name="index" options={{ title: "Home" }} />
-					<Stack.Screen name="about" options={{ title: "About Me" }} />
-				</Stack>
-				<BottomNavigation
-					appearance="noIndicator"
-					selectedIndex={tabIndex}
-					onSelect={index => setTabIndex(index)}
-				>
-					<BottomNavigationTab title="USERS" />
-					<BottomNavigationTab title="ORDERS" />
-					<BottomNavigationTab title="TRANSACTIONS" />
-				</BottomNavigation>
-			</Layout>
-		</ApplicationProvider>
-	);
+  const colorScheme = useColorScheme();
+
+  return (
+    <TamaguiProvider
+      config={tamaguiConfig}
+      defaultTheme={colorScheme === 'dark' ? 'dark' : 'light'}
+    >
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </TamaguiProvider>
+  );
 }
